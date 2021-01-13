@@ -13,13 +13,18 @@ namespace Krypt {
     //public delegate void TrackingEvent(TrackType type, Vector3 pos);
 
     public enum Quantize {
-        Quarter = 1,
-        Eigth = 2,
-        Sixteenth = 4,
-        ThirtySecond = 8,
-        SixtyFourths = 16,
-        None = 0,
+        None = -8,
+        SixtyFourths = -4,
+        ThirtySecond = -3,
+        Sixteenth = -2,
+        Eigth = -1,
+        Quarter = 0,
+        Half = 1,
+        Whole = 2,
+        Doulble = 3,
     }
+
+    public enum MetronomeType { Off, Pickup, On }
 
     public class SongController : MonoBehaviour {
 
@@ -35,7 +40,7 @@ namespace Krypt {
         private float _off_b => beatOffset * MinorTime / 2;
 
         [Header("Metronome")]
-        public bool metronomeEnabled = true;
+        public MetronomeType metronomeEnabled = MetronomeType.Pickup;
         [Tooltip("Object in scene representing the metronome")]
         public GameObject MetronomeObj;
         [Tooltip("Prefab SFX_Obj for full measure tick")]
@@ -89,12 +94,18 @@ namespace Krypt {
         }
 
         private void Init() {
-
             src = GetComponent<AudioSource>();
+            if (src.loop) src.loop = false;
         }
 
         void FixedUpdate() {
             if (IsPlaying) {
+                // check if the song has finished
+                if (!src.isPlaying) {
+                    Stop();
+                    return;
+                }
+
                 PlayTime += Time.deltaTime;
                 PulseCheck(PlayTime);
 
@@ -112,12 +123,15 @@ namespace Krypt {
         /// Checks if a rythmic pulse can be applied at the given time in seconds
         /// </summary>
         private void PulseCheck(float t0) {
+            bool doTick = metronomeEnabled == MetronomeType.On ||
+                (metronomeEnabled == MetronomeType.Pickup && !IsPlaying && !CanPlay);
+
             if ((t0 + pulseFrameOffset * Time.deltaTime + _off_b) % MajorTime <= Time.deltaTime && metronomeMajor) {
-                if (metronomeEnabled) SFX_Spawner.instance.SpawnFX(metronomeMajor, MetronomeObj.transform.position,
+                if (doTick) SFX_Spawner.instance.SpawnFX(metronomeMajor, MetronomeObj.transform.position,
                      parent: MetronomeObj.transform);
                 MajorNote?.Invoke();
             } else if ((t0 + pulseFrameOffset * Time.deltaTime + _off_b) % MinorTime <= Time.deltaTime && metronomeMinor) {
-                if (metronomeEnabled) SFX_Spawner.instance.SpawnFX(metronomeMinor, MetronomeObj.transform.position,
+                if (doTick) SFX_Spawner.instance.SpawnFX(metronomeMinor, MetronomeObj.transform.position,
                     parent: MetronomeObj.transform);
                 MinorNote?.Invoke();
             } else if ((t0 + pulseFrameOffset * Time.deltaTime) % MinorTime <= Time.deltaTime && metronomeMinor) {
@@ -149,7 +163,6 @@ namespace Krypt {
                 src.Pause();
                 //ConveyorController.instance.Pause();
                 OnPauseSong?.Invoke();
-                print("Paused!");
 
                 // quantize play time to the nearest measure
                 PlayTime -= (PlayTime % MajorTime);
@@ -169,21 +182,26 @@ namespace Krypt {
             playInitiater = StartCoroutine(PlayDelay());
         }
 
+        public void Stop() {
+            IsPlaying = false;
+            src.Stop();
+            src.time = PlayTime = 0;
+            init = false;
+            OnPauseSong?.Invoke();
+        }
+
         /// <summary>
         /// Start playback after a delay
         /// </summary>
         /// <returns></returns>
         public IEnumerator PlayDelay() {
             delayTime = 0;
-            //StartCoroutine(BrickSpawner.instance.Reset());
             yield return new WaitForSeconds(PickupTime);
 
             IsPlaying = true;
             OnPlaySong?.Invoke();
-            //ConveyorController.instance.Play();
             src.Play();
             playInitiater = null;
-            print("Playing!");
         }
 
         #endregion

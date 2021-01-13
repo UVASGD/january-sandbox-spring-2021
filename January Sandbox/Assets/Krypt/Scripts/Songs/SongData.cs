@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Krypt {
 
-    public enum AttackType { Quick, Heavy, Block, Projectile }
+    public enum AttackType { Quick, Heavy, Projectile, BlockOn, BlockOff, Spawn, Despawn, Warp }
 
     public enum Difficulty { Easy, Normal, Hard }
 
@@ -26,11 +26,13 @@ namespace Krypt {
 
     [Serializable]
     public class NoteEvent {
+        public string _enemy_id;
         public float _time;
         public int _lineIndex;
         public int _lineLayer;
         public AttackType _type;
-        public NoteEvent(float time, int column, int row, AttackType type) {
+        public NoteEvent(string id, float time, int column, int row, AttackType type) {
+            _enemy_id = id;
             _time = time;
             _lineIndex = column;
             _lineLayer = row;

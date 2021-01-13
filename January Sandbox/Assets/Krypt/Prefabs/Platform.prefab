@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 3154333095739388462}
   - component: {fileID: 6898350668866228814}
   - component: {fileID: 8759009625703420229}
+  - component: {fileID: 863971817327741420}
   m_Layer: 0
   m_Name: Spawn Indicator
   m_TagString: Untagged
@@ -628,6 +629,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &863971817327741420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592633043734115368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bb45c4638198d4db5bd41f049eec60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6243162138088908469
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +683,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5436870777581263032}
+  - component: {fileID: 3668001287108459022}
+  - component: {fileID: 5161546150910552349}
   m_Layer: 0
   m_Name: SpawnLoc
   m_TagString: Untagged
@@ -691,3 +706,28 @@ Transform:
   m_Father: {fileID: 6243162138088908470}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3668001287108459022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860489313315759468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bb45c4638198d4db5bd41f049eec60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &5161546150910552349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860489313315759468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.299999, y: 6.950001, z: 4.3}
+  m_Center: {x: -0.00000047683716, y: -3.225, z: 0}

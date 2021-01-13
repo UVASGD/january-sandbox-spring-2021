@@ -75,15 +75,17 @@ namespace Krypt {
         }
 
         public override void MajorNote() {
+            if (disabled) return;
             goalColor = majorEmissionColor;
             //goalIntensity = majorEmissionIntensity;
             base.MajorNote();
         }
 
         public override void MinorNote() {
+            if (disabled) return;
             goalColor = minorEmissionColor;
             //goalIntensity = minorEmissionIntensity;
-            base.MajorNote();
+            base.MinorNote();
         }
     }
 }

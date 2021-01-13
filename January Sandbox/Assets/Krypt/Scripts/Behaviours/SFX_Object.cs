@@ -14,7 +14,15 @@ namespace Krypt {
 
         // Use this for initialization
         void Start() {
-            float max_audio_len = 0, max_part_len = 0;
+            float max_audio_len = AdjustAudio(), max_part_len = 0;
+            foreach (ParticleSystem part in GetComponentsInChildren<ParticleSystem>()) {
+                if (part.main.duration > max_part_len) max_part_len = part.main.duration;
+            }
+            Destroy(gameObject, 1.5f * Mathf.Max(max_audio_len, max_part_len));
+        }
+
+        protected float AdjustAudio() {
+            float max_audio_len = 0;
             foreach (AudioSource aud in GetComponents<AudioSource>()) {
                 if (vol != -1) {
                     aud.volume = vol;
@@ -24,10 +32,7 @@ namespace Krypt {
                 aud.volume += Random.Range(-amp_range, 0);
                 if (aud.clip.length > max_audio_len) max_audio_len = aud.clip.length;
             }
-            foreach (ParticleSystem part in GetComponentsInChildren<ParticleSystem>()) {
-                if (part.main.duration > max_part_len) max_part_len = part.main.duration;
-            }
-            Destroy(gameObject, 1.5f * Mathf.Max(max_audio_len, max_part_len));
+            return max_audio_len;
         }
     }
 }

@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &7182505529878588400
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8028804778974516895}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7182505531030072213
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +11,7 @@ GameObject:
   - component: {fileID: 7182505531030072216}
   - component: {fileID: 7182505531030072215}
   - component: {fileID: 7182505531030072214}
+  - component: {fileID: 1656729844450787675}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -64,6 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52b8a62ddd5ef04095abf270cc3c383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStatic: 0
+  id: 
+  classification: 0
+  maxHealth: 2
+  attackStrength: 1
+  anim: {fileID: 7182505529878588400}
 --- !u!114 &7182505531030072214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,63 +64,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e86fdd1ea114174d88da6fb0dcb1c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabled: 0
   offbeat: 0
   speed: 2.5
   duration: 0.5
   killSpeed: 0.5
-  majorScaleAmplitude: 0.8
+  majorScaleAmplitude: 0.92
   minorScaleAmplitude: 0.8
   scaleFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.000012040138
-      inSlope: 9.134525
-      outSlope: 9.134525
+      value: 0.70000076
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.08641974
-    - serializedVersion: 3
-      time: 0.2
-      value: 1.0025815
-      inSlope: 0.12779191
-      outSlope: 0.12779191
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.7037035
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.33705193
-      inSlope: 0.010506077
-      outSlope: 0.010506077
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.7185184
+      outWeight: 0
     - serializedVersion: 3
       time: 0.75
-      value: 0.4986022
-      inSlope: -0.27178302
-      outSlope: -0.27178302
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.42387876
-      outWeight: 0.40406737
-    - serializedVersion: 3
-      time: 1
       value: 0
-      inSlope: -2.500568
-      outSlope: -2.500568
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.12429625
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1656729844450787675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182505531030072213}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 1}
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!95 &7182505529878588400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028804778974516895}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7182505529878588366
 PrefabInstance:
   m_ObjectHideFlags: 0

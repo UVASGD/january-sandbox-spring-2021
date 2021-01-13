@@ -15,11 +15,12 @@ MonoBehaviour:
   title: Night Force
   song: {fileID: 8300000, guid: 8e1d03a8982c4d243aeef3079939881b, type: 3}
   BPM: 94
-  beatsPerBar: 4
+  beatsPerBar: 2
   measureUnit: 4
   pickupCount: 2
   notes:
-  - _time: 1
+  - _enemy_id: 
+    _time: 1
     _lineIndex: 12
     _lineLayer: 12
     _type: 0

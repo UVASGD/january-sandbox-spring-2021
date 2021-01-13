@@ -7,6 +7,8 @@ namespace Krypt {
 
     public class Squasher : MonoBehaviour {
 
+        public bool disabled;
+
         [Header("Pulse Timing")]
         public bool offbeat = false;
         public float speed = 2.5f;
@@ -50,11 +52,13 @@ namespace Krypt {
         }
 
         public virtual void MajorNote() {
+            if (disabled) return;
             scaleAmplitude = majorScaleAmplitude;
             NoteHit();
         }
 
         public virtual void MinorNote() {
+            if (disabled) return;
             scaleAmplitude = minorScaleAmplitude;
             NoteHit();
         }
