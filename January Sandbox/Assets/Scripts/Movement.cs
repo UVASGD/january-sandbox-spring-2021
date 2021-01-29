@@ -2,7 +2,7 @@
 
 public class Movement : MonoBehaviour
 {
-    public float movementSpeed;
+    public float movementSpeed = 10f;
     private Rigidbody rb;
     private Vector3 movement;
     private float turnSmoothVelocity;
